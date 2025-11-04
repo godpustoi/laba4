@@ -1,30 +1,30 @@
-x1 = float(input("Введите x1: "))
-y1 = float(input("Введите y1: "))
-x2 = float(input("Введите x2: "))
-y2 = float(input("Введите y2: "))
-
-if x1 == 0 or y1 == 0 or x2 == 0 or y2 == 0:
-    print("Ошибка: все координаты должны быть не равны 0")
-else:
-    if x1 > 0 and y1 > 0:
-        quarter1 = 1
-    elif x1 < 0 and y1 > 0:
-        quarter1 = 2
-    elif x1 < 0 and y1 < 0:
-        quarter1 = 3
-    else:  # x1 > 0 and y1 < 0
-        quarter1 = 4
-
-    if x2 > 0 and y2 > 0:
-        quarter2 = 1
-    elif x2 < 0 and y2 > 0:
-        quarter2 = 2
-    elif x2 < 0 and y2 < 0:
-        quarter2 = 3
-    else:  # x2 > 0 and y2 < 0
-        quarter2 = 4
-
-    if quarter1 == quarter2:
-        print(f"Обе точки лежат в {quarter1}-й координатной четверти")
-    else:
-        print("Точки лежат в разных координатных четвертях")
+import time
+import random
+totl_time = 0
+right_answer = 0
+N = int(input("Количество строк: "))
+for i in range(N):
+    print(f"{i + 1}/{N}")
+    a = random.randint(2, 9)
+    b = random.randint(2, 9)
+    while True:
+        try:
+            start_time = time.time()
+            answer = int(input(f"{a} × {b} = "))
+            time_spend = time.time() - start_time
+            break
+        except ValueError:
+            print("Пожалуйста, введите целое число!")
+    totl_time += time_spend
+    if answer == a*b:
+        right_answer+=1
+        print(f"Верно(Время:{time_spend:.1f}сек.)")
+    elif answer != a*b:
+        print(f"Неверно! Правильно: {a*b}(Время:{time_spend:.1f}сек.)")
+print(f"=" * 50)
+print("СТАТИСТИКА:")
+print(f"=" * 50)
+print(f"Общее время:{totl_time:.1f}")
+print(f"Cреднее время на вопрос:{totl_time / N:.1f}")
+print(f'Правильных ответов:{right_answer}/{N}')
+print(f"Процент правильных: {right_answer*100 / N}%")
